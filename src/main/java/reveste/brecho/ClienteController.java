@@ -48,7 +48,7 @@ public class ClienteController {
     @PutMapping("/{id}")
     public Cliente atualizar(
         @PathVariable int id,
-        @PathVariable Cliente clienteAtualizado
+        @RequestBody Cliente clienteAtualizado
     ) {
         if (clienteRepository.existsById(id)){
             clienteAtualizado.setId(id);
