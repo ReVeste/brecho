@@ -12,6 +12,10 @@ public class Peca {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
+    private Integer tamanho;
+    private String cor;
+    private String marca;
+    private Double preco;
     private String descricao;
 
     public Integer getId() {
@@ -28,6 +32,38 @@ public class Peca {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Integer getTamanho() {
+        return tamanho;
+    }
+
+    public void setTamanho(Integer tamanho) {
+        this.tamanho = tamanho;
+    }
+
+    public String getCor() {
+        return cor;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
     }
 
     public String getDescricao() {
