@@ -1,4 +1,4 @@
-package reveste.brecho;
+package reveste.brecho.entidades;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,11 +15,10 @@ public class Usuario {
 
     private Integer id;
     private String nome;
-    private String sobrenome;
-    private String email;
-    private Date dataNascimento;
-    private String telefone;
     private String cpf;
+    private String telefone;
+    private Date dataNascimento;
+    private String email;
     private String senha;
 
     public Integer getId() {
@@ -36,14 +35,6 @@ public class Usuario {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
     }
 
     public String getEmail() {

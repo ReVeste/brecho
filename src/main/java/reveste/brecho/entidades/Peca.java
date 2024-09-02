@@ -1,4 +1,4 @@
-package reveste.brecho;
+package reveste.brecho.entidades;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,8 +15,26 @@ public class Peca {
     private Integer tamanho;
     private String cor;
     private String marca;
+    private String categoria;
     private Double preco;
     private String descricao;
+    private String urlImagem;
+
+    public String getUrlImagem() {
+        return urlImagem;
+    }
+
+    public void setUrlImagem(String urlImagem) {
+        this.urlImagem = urlImagem;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 
     public Integer getId() {
         return id;
