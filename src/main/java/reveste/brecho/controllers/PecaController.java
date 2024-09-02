@@ -1,8 +1,10 @@
-package reveste.brecho;
+package reveste.brecho.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reveste.brecho.entidades.Peca;
+import reveste.brecho.repository.PecaRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -54,27 +56,25 @@ public class PecaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Peca> atualizar(
-            @PathVariable int id,
-            @PathVariable Peca peca
-    ) {
+    public ResponseEntity<Peca> atualizar(@PathVariable int id, @RequestBody Peca peca) {
+
         if (!pecaRepository.existsById(id)){
             return ResponseEntity.status(404).build();
         }
+
         peca.setId(id);
-        Peca pecaAtualizada = pecaRepository.save(peca);
-        return ResponseEntity.status(200).body(pecaAtualizada);
+        return ResponseEntity.status(200).body(pecaRepository.save(peca));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable int id){
-
+    public ResponseEntity<Void> deletar(@PathVariable int id) {
         if (pecaRepository.existsById(id)){
             pecaRepository.deleteById(id);
+
             return ResponseEntity.status(204).build();
         }
-        return ResponseEntity.status(404).build();
 
+        return ResponseEntity.status(404).build();
     }
 
 }
