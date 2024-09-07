@@ -13,13 +13,6 @@ import java.util.Optional;
 @RequestMapping("/peças")
 public class PecaController {
 
-    /*
-    Create - Post
-    Read - Get
-    Update - Put/Patch
-    Delete - Delete
-     */
-
     @Autowired
     private PecaRepository pecaRepository;
 

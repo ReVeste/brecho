@@ -5,6 +5,7 @@ import reveste.brecho.entity.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
+    boolean existsByEmailOrCpf(String email, String cpf);
 
 
 }

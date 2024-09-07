@@ -1,5 +1,6 @@
 package reveste.brecho.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,17 +14,9 @@ import java.util.Optional;
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
-    /*
-    Create - Post
-    Read - Get
-    Update - Put/Patch
-    Delete - Delete
-     */
-
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    // Get do usuário pelo id
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> buscarPorId(@PathVariable int id){
         Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
@@ -35,7 +28,6 @@ public class UsuarioController {
 
     }
 
-    // Get de todos os usuários
     @GetMapping
     public ResponseEntity<List<Usuario>> listar() {
 
@@ -47,18 +39,20 @@ public class UsuarioController {
         return ResponseEntity.status(200).body(usuarios);
     }
 
-    // Post
     @PostMapping
-    public ResponseEntity<Usuario> criar(@RequestBody Usuario novoUsuario){
+    public ResponseEntity<Usuario> criar(@RequestBody @Valid Usuario novoUsuario){
+
+        if (usuarioRepository.existsByEmailOrCpf(novoUsuario.getEmail(), novoUsuario.getCpf())) {
+            return ResponseEntity.status(422).build();
+        }
 
         novoUsuario.setId(null);
         return ResponseEntity.status(201).body(usuarioRepository.save(novoUsuario));
 
     }
 
-    // Put
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> atualizar(@PathVariable int id, @RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> atualizar(@PathVariable int id, @RequestBody @Valid Usuario usuario) {
         if (!usuarioRepository.existsById(id)){
             return ResponseEntity.status(404).build();
         }
@@ -66,7 +60,6 @@ public class UsuarioController {
         return ResponseEntity.status(200).body(usuarioRepository.save(usuario));
     }
 
-    // Delete
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable int id){
 

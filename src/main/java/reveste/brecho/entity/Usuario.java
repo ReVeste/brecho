@@ -7,12 +7,15 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.validator.constraints.br.CPF;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Getter @Setter
+@ToString
 public class Usuario {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +31,7 @@ public class Usuario {
     private String telefone;
 
     @NotNull @Past
-    private Date dataNascimento;
+    private LocalDate dataNascimento;
 
     @NotBlank @Email
     private String email;
