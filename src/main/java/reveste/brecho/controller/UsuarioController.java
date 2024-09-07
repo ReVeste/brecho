@@ -1,9 +1,9 @@
-package reveste.brecho.controllers;
+package reveste.brecho.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import reveste.brecho.entidades.Usuario;
+import reveste.brecho.entity.Usuario;
 import reveste.brecho.repository.UsuarioRepository;
 
 import java.util.List;
@@ -58,16 +58,12 @@ public class UsuarioController {
 
     // Put
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> atualizar(
-        @PathVariable int id,
-        @PathVariable Usuario usuario
-    ) {
+    public ResponseEntity<Usuario> atualizar(@PathVariable int id, @RequestBody Usuario usuario) {
         if (!usuarioRepository.existsById(id)){
             return ResponseEntity.status(404).build();
         }
         usuario.setId(id);
-        Usuario usuarioAtualizado = usuarioRepository.save(usuario);
-        return ResponseEntity.status(200).body(usuarioAtualizado);
+        return ResponseEntity.status(200).body(usuarioRepository.save(usuario));
     }
 
     // Delete
