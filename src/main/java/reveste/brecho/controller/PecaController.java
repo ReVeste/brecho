@@ -1,9 +1,9 @@
-package reveste.brecho.controllers;
+package reveste.brecho.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import reveste.brecho.entidades.Peca;
+import reveste.brecho.entity.Peca;
 import reveste.brecho.repository.PecaRepository;
 
 import java.util.List;
