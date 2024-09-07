@@ -15,7 +15,7 @@ public class Peca {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-//    private String nome;
+    private String nome;
     private Integer tamanho;
     private String cor;
     private String marca;
