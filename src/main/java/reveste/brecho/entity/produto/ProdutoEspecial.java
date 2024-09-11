@@ -1,12 +1,16 @@
 package reveste.brecho.entity.produto;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@DiscriminatorValue("RARA")
 public class ProdutoEspecial extends Produto{
 
     private String antigoDono;
@@ -22,4 +26,9 @@ public class ProdutoEspecial extends Produto{
         this.antigoDono = antigoDono;
         this.historia = historia;
     }
+
+    public ProdutoEspecial() {
+        super();
+    }
+
 }
