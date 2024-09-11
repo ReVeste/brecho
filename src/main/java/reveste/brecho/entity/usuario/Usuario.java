@@ -1,4 +1,4 @@
-package reveste.brecho.entity;
+package reveste.brecho.entity.usuario;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,7 +11,6 @@ import lombok.ToString;
 import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Getter @Setter
