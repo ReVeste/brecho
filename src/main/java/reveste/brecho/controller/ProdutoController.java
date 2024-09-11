@@ -3,7 +3,9 @@ package reveste.brecho.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import reveste.brecho.entity.Produto;
+import reveste.brecho.entity.produto.Produto;
+import reveste.brecho.entity.produto.ProdutoEspecial;
+import reveste.brecho.entity.produto.TipoProdutoEnum;
 import reveste.brecho.repository.ProdutoRepository;
 
 import java.util.List;
@@ -44,6 +46,13 @@ public class ProdutoController {
     public ResponseEntity<Produto> criar(@RequestBody Produto novoProduto){
 
         novoProduto.setId(null);
+        ProdutoEspecial produtoEspecial;
+
+        if(novoProduto.getTipo().equals(TipoProdutoEnum.RARA)){
+            produtoEspecial = (ProdutoEspecial) novoProduto;
+            return ResponseEntity.status(201).body(produtoRepository.save(produtoEspecial));
+        }
+
         return ResponseEntity.status(201).body(produtoRepository.save(novoProduto));
 
     }

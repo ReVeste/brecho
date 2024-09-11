@@ -65,6 +65,11 @@
 			<version>1.18.34</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.gtbr</groupId>
+			<artifactId>via-cep</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
