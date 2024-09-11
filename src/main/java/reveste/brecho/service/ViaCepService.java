@@ -16,7 +16,4 @@ public class ViaCepService {
         return Arrays.asList(enderecos);
     }
 
-    public void ordenarPorLogradouro() {
-
-    }
 }
