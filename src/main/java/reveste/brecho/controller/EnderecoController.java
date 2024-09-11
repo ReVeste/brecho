@@ -1,7 +1,7 @@
 package reveste.brecho.controller;
 
-import com.gtbr.ViaCepClient;
-import com.gtbr.domain.Cep;
+//import com.gtbr.ViaCepClient;
+//import com.gtbr.domain.Cep;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reveste.brecho.entity.Endereco;
