@@ -1,7 +1,7 @@
 package reveste.brecho.entity;
 
-import com.gtbr.domain.Cep;
-import com.gtbr.utils.CEPUtils;
+//import com.gtbr.domain.Cep;
+//import com.gtbr.utils.CEPUtils;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
