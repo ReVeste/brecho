@@ -1,24 +1,24 @@
-package reveste.brecho.entity.dto;
+package reveste.brecho.dto.produto;
 
 import lombok.Getter;
 import lombok.Setter;
-import reveste.brecho.entity.produto.TamanhoProdutoEnum;
-import reveste.brecho.entity.produto.TipoProdutoEnum;
+import reveste.brecho.entity.produto.TamanhoEnum;
+import reveste.brecho.entity.produto.TipoEnum;
 
 @Getter
 @Setter
-public class ProdutoDto {
+public class ProdutoDTO {
 
     // Atributos de Produto
     private String nome;
-    private TamanhoProdutoEnum tamanho;
+    private TamanhoEnum tamanho;
     private String cor;
     private String categoria;
     private String subCategoria;
     private Double preco;
     private String descricao;
     private String urlImagem;
-    private TipoProdutoEnum tipo;
+    private TipoEnum tipo;
 
     // Atributos de ProdutoEspecial
     private String antigoDono;

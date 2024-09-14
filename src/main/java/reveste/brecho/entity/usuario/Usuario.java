@@ -39,5 +39,5 @@ public class Usuario {
     private String senha;
 
     @NotNull
-    private TipoUsuarioEnum tipo;
+    private TipoEnum tipo;
 }

@@ -1,6 +1,6 @@
 package reveste.brecho.entity.produto;
 
-public enum TipoProdutoEnum {
+public enum TipoEnum {
     DESGASTADA,
     BOA_QUALIDADE,
     RARA;
