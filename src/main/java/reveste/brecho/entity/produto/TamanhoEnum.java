@@ -1,6 +1,6 @@
 package reveste.brecho.entity.produto;
 
-public enum TamanhoProdutoEnum {
+public enum TamanhoEnum {
     PP,
     P,
     M,

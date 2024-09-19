@@ -1,6 +1,6 @@
-package reveste.brecho.utils;
+package reveste.brecho.util;
 
-import reveste.brecho.entity.Endereco;
+import reveste.brecho.entity.endereco.Endereco;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package reveste.brecho.entity;
+package reveste.brecho.entity.endereco;
 
 import lombok.Getter;
 import lombok.Setter;
