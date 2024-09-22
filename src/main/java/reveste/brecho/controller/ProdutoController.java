@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reveste.brecho.dto.produto.ProdutoDTO;
 import reveste.brecho.entity.produto.Produto;
-import reveste.brecho.service.ProdutoService;
+import reveste.brecho.service.produto.ProdutoService;
 
 import java.util.List;
 
