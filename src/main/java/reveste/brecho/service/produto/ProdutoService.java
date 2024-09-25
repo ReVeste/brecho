@@ -1,4 +1,4 @@
-package reveste.brecho.service;
+package reveste.brecho.service.produto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
