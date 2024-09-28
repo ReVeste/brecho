@@ -1,4 +1,4 @@
-package reveste.brecho.entity.produto;
+package reveste.brecho.enun.produto;
 
 public enum TamanhoEnum {
     PP,

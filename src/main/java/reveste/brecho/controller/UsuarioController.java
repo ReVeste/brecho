@@ -2,12 +2,10 @@ package reveste.brecho.controller;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import reveste.brecho.dto.usuario.UsuarioCriacaoDto;
-import reveste.brecho.dto.usuario.UsuarioLoginDto;
-import reveste.brecho.dto.usuario.UsuarioTokenDto;
+import reveste.brecho.dto.usuario.*;
 import reveste.brecho.entity.usuario.Usuario;
 import reveste.brecho.service.usuario.UsuarioService;
 
@@ -15,51 +13,57 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios")
+@RequiredArgsConstructor
 public class UsuarioController {
 
-    @Autowired
-    private UsuarioService usuarioService;
+    private final UsuarioService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> buscarPorId(@PathVariable int id){
-        return ResponseEntity.ok(usuarioService.buscarPorId(id));
+    public ResponseEntity<UsuarioDetalheRespostaDto> buscarPorId(@PathVariable int id){
+        return ResponseEntity.ok(UsuarioMapper.toDetalheDto(service.buscarPorId(id)));
     }
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> listar() {
-        List<Usuario> usuarios = usuarioService.listar();
+    public ResponseEntity<List<UsuarioResumoDto>> listar() {
+        List<Usuario> usuarios = service.listar();
 
         if (usuarios.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(usuarios);
+
+        return ResponseEntity.ok(usuarios.stream().map(UsuarioMapper::toResumoDto).toList());
     }
 
+    // usuário se registrando no sistema
     @PostMapping
-    public ResponseEntity<Usuario> criar(@RequestBody @Valid Usuario novoUsuario){
-        return ResponseEntity.created(null).body(usuarioService.criar(novoUsuario));
+    public ResponseEntity<UsuarioDetalheRespostaDto> registrar(@RequestBody @Valid UsuarioCriacaoDto novoUsuario) {
+        Usuario usuarioCriado = service.criar(UsuarioMapper.dtoToEntity(novoUsuario));
+        return ResponseEntity.created(null).body(UsuarioMapper.toDetalheDto(usuarioCriado));
     }
 
+    // usuário atualizando informações
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> atualizar(@PathVariable int id, @RequestBody @Valid Usuario usuario) {
-        return ResponseEntity.ok(usuarioService.atualizarPorId(id, usuario));
+    public ResponseEntity<UsuarioDetalheRespostaDto> atualizarPorId(@PathVariable int id, @RequestBody @Valid UsuarioCriacaoDto usuario) {
+        Usuario usuarioAtualizado = service.atualizar(id, UsuarioMapper.dtoToEntity(usuario));
+        return ResponseEntity.ok(UsuarioMapper.toDetalheDto(usuarioAtualizado));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable int id){
-        usuarioService.deletarPorId(id);
+        service.deletarPorId(id);
         return ResponseEntity.noContent().build();
-    }
-
-    @PostMapping("/registrar") @SecurityRequirement(name = "Bearer")
-    public ResponseEntity<Void> registrar(@RequestBody @Valid UsuarioCriacaoDto usuarioCriacaoDto) {
-        usuarioService.criarNovoUsuario(usuarioCriacaoDto);
-        return ResponseEntity.created(null).build();
     }
 
     @PostMapping("/login")
     public ResponseEntity<UsuarioTokenDto> login(@RequestBody UsuarioLoginDto usuarioLoginDto) {
-        return ResponseEntity.ok(usuarioService.autenticar(usuarioLoginDto));
+        return ResponseEntity.ok(service.autenticar(usuarioLoginDto));
+    }
+
+    // admin criando usuário
+    @PostMapping("/registrar") @SecurityRequirement(name = "Bearer")
+    public ResponseEntity<Void> criar(@RequestBody @Valid UsuarioCriacaoDto usuarioCriacaoDto) {
+        service.criarNovoUsuario(usuarioCriacaoDto);
+        return ResponseEntity.created(null).build();
     }
 
 }
