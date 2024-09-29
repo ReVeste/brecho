@@ -45,7 +45,7 @@ public class UsuarioService {
 
     public Usuario criar(Usuario usuario) {
         if (usuarioRepository.existsByEmailOrCpf(usuario.getEmail(), usuario.getCpf())) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Já há um usuário com esse e-mail ou CPF");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Conflito: e-mail ou cpf já registrado");
         }
 
         usuario.setId(null);
@@ -68,7 +68,7 @@ public class UsuarioService {
 
     public void deletarPorId(int id) {
         if (!usuarioRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado no banco");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
         }
 
         usuarioRepository.deleteById(id);
