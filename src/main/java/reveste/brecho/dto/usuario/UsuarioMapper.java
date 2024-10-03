@@ -62,4 +62,12 @@ public class UsuarioMapper {
                 .dataNascimento(dto.getDataNascimento())
                 .build();
     }
+
+    public static Usuario fkDtoToEntity(UsuarioFkDto dto) {
+        if (dto == null) return null;
+
+        return Usuario.builder()
+                .id(dto.getId())
+                .build();
+    }
 }

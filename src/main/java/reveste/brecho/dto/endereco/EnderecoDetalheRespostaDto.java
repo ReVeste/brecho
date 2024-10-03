@@ -1,17 +1,13 @@
-package reveste.brecho.entity.endereco;
+package reveste.brecho.dto.endereco;
 
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 import reveste.brecho.entity.usuario.Usuario;
 
-@Entity
+@Data
 @Builder
-@Getter @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class Endereco {
+public class EnderecoDetalheRespostaDto {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String apelido;
     private String cep;
@@ -20,8 +16,5 @@ public class Endereco {
     private String bairro;
     private String localidade;
     private String uf;
-
-    @ManyToOne
     private Usuario usuario;
-
 }

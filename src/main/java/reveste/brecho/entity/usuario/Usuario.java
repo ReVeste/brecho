@@ -1,15 +1,14 @@
 package reveste.brecho.entity.usuario;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
+import reveste.brecho.entity.endereco.Endereco;
 import reveste.brecho.enun.usuario.TipoEnum;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Builder
@@ -40,4 +39,7 @@ public class Usuario {
     private String senha;
 
     private TipoEnum tipo;
+
+    @OneToMany
+    List<Endereco> enderecos;
 }
