@@ -48,7 +48,6 @@ public class UsuarioService {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Conflito: e-mail ou cpf já registrado");
         }
 
-        usuario.setId(null);
         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         return usuarioRepository.save(usuario);
     }

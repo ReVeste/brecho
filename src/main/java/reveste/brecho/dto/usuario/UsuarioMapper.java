@@ -1,5 +1,6 @@
 package reveste.brecho.dto.usuario;
 
+import reveste.brecho.entity.produto.Produto;
 import reveste.brecho.entity.usuario.Usuario;
 
 public class UsuarioMapper {
@@ -60,6 +61,14 @@ public class UsuarioMapper {
                 .telefone(dto.getTelefone())
                 .cpf(dto.getCpf())
                 .dataNascimento(dto.getDataNascimento())
+                .build();
+    }
+
+    public static Usuario fkDtoToEntity(UsuarioFkDto dto) {
+        if (dto == null) return null;
+
+        return Usuario.builder()
+                .id(dto.getId())
                 .build();
     }
 }
