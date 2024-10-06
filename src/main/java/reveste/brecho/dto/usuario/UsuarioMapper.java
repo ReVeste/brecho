@@ -1,5 +1,6 @@
 package reveste.brecho.dto.usuario;
 
+import reveste.brecho.entity.produto.Produto;
 import reveste.brecho.entity.usuario.Usuario;
 
 public class UsuarioMapper {

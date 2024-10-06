@@ -18,7 +18,7 @@ public class Endereco {
     private String logradouro;
     private String complemento;
     private String bairro;
-    private String localidade;
+    private String cidade;
     private String uf;
 
     @ManyToOne

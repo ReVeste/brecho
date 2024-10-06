@@ -14,7 +14,15 @@ public class EnderecoDetalheRespostaDto {
     private String logradouro;
     private String complemento;
     private String bairro;
-    private String localidade;
+    private String cidade;
     private String uf;
-    private Usuario usuario;
+
+    private UsuarioDto usuario;
+
+
+    @Data @Builder
+    static class UsuarioDto {
+        private Integer id;
+        private String nome;
+    }
 }
