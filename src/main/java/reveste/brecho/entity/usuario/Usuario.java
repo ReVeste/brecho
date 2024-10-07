@@ -1,24 +1,24 @@
 package reveste.brecho.entity.usuario;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
+import reveste.brecho.entity.endereco.Endereco;
+import reveste.brecho.enun.usuario.TipoEnum;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
+@Builder
 @Getter @Setter
-@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Usuario {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter private Integer id;
+    private Integer id;
 
     @NotBlank @Size(min = 3, max = 100)
     private String nome;
@@ -38,6 +38,8 @@ public class Usuario {
     @NotBlank
     private String senha;
 
-    @NotNull
     private TipoEnum tipo;
+
+    @OneToMany
+    List<Endereco> enderecos;
 }
