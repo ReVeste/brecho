@@ -2,13 +2,18 @@ package reveste.brecho.entity.produto;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import reveste.brecho.dto.produto.ProdutoDTO;
+import lombok.experimental.SuperBuilder;
+import reveste.brecho.enun.produto.TamanhoEnum;
+import reveste.brecho.enun.produto.TipoEnum;
 
-@Getter
-@Setter
 @Entity
+@Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @DiscriminatorValue("RARA")
 public class ProdutoEspecial extends Produto{
 
@@ -19,31 +24,6 @@ public class ProdutoEspecial extends Produto{
         super(id, nome, tamanho, cor, tipo, categoria, subCategoria, preco, descricao, urlImagem);
         this.antigoDono = antigoDono;
         this.historia = historia;
-    }
-
-    public ProdutoEspecial(String antigoDono, String historia) {
-        this.antigoDono = antigoDono;
-        this.historia = historia;
-    }
-
-    public ProdutoEspecial(ProdutoDTO produtoDto) {
-        this.setNome(produtoDto.getNome());
-        this.setTamanho(produtoDto.getTamanho());
-        this.setCor(produtoDto.getCor());
-        this.setCategoria(produtoDto.getCategoria());
-        this.setSubCategoria(produtoDto.getSubCategoria());
-        this.setPreco(produtoDto.getPreco());
-        this.setDescricao(produtoDto.getDescricao());
-        this.setUrlImagem(produtoDto.getUrlImagem());
-        this.setTipo(produtoDto.getTipo());
-
-        // Mapeando atributos de ProdutoEspecial
-        this.antigoDono = produtoDto.getAntigoDono();
-        this.historia = produtoDto.getHistoria();
-    }
-
-    public ProdutoEspecial() {
-        super();
     }
 
 }

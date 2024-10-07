@@ -1,6 +1,6 @@
 package reveste.brecho.service.usuario;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,26 +14,20 @@ import reveste.brecho.dto.usuario.UsuarioCriacaoDto;
 import reveste.brecho.dto.usuario.UsuarioLoginDto;
 import reveste.brecho.dto.usuario.UsuarioTokenDto;
 import reveste.brecho.entity.usuario.Usuario;
-import reveste.brecho.mapper.usuario.UsuarioMapper;
+import reveste.brecho.dto.usuario.UsuarioMapper;
 import reveste.brecho.repository.UsuarioRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UsuarioService {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private GerenciadorTokenJwt gerenciadorTokenJwt;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final GerenciadorTokenJwt gerenciadorTokenJwt;
+    private final AuthenticationManager authenticationManager;
+    private final UsuarioRepository usuarioRepository;
 
     public Usuario buscarPorId(Integer id) {
         Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
@@ -51,16 +45,20 @@ public class UsuarioService {
 
     public Usuario criar(Usuario usuario) {
         if (usuarioRepository.existsByEmailOrCpf(usuario.getEmail(), usuario.getCpf())) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Já há um usuário com esse e-mail ou CPF");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Conflito: e-mail ou cpf já registrado");
         }
 
-        usuario.setId(null);
+        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         return usuarioRepository.save(usuario);
     }
 
-    public Usuario atualizarPorId(int id, Usuario usuario) {
+    public Usuario atualizar(int id, Usuario usuario) {
         if (!usuarioRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não foi localizado um usuário com esse id no banco");
+        }
+
+        if (!usuarioRepository.existsByEmailOrCpf(usuario.getEmail(), usuario.getCpf())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Já há um usuário com esse e-mail ou CPF");
         }
 
         usuario.setId(id);
@@ -69,7 +67,7 @@ public class UsuarioService {
 
     public void deletarPorId(int id) {
         if (!usuarioRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado no banco");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
         }
 
         usuarioRepository.deleteById(id);

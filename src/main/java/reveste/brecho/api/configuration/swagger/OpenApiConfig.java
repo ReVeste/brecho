@@ -1,4 +1,4 @@
-package reveste.brecho.api.configuration.security.swagger;
+package reveste.brecho.api.configuration.swagger;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
